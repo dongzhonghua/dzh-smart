@@ -290,3 +290,10 @@ TODO
 
 - Smart 系列博文：http://my.oschina.net/huangyong/blog/158380
 - Maven 那点事儿：http://my.oschina.net/huangyong/blog/194583
+
+
+### TODO
+
+- [ ]  Action和后面Bean等的遍历可不可以用一次遍历就可以？
+
+- [ ] cache的LRU算法的实现，参考一下mybatis的实现方案

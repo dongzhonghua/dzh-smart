@@ -7,12 +7,15 @@ import org.smart4j.framework.InstanceFactory;
 import org.smart4j.framework.core.ClassScanner;
 import org.smart4j.framework.core.fault.InitializationError;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 初始化插件
  *
  * @author huangyong
  * @since 2.0
  */
+@Slf4j
 public class PluginHelper {
 
     /**
@@ -37,6 +40,7 @@ public class PluginHelper {
                 // 将插件实例添加到插件列表中
                 pluginList.add(plugin);
             }
+            log.info(String.valueOf(pluginList));
         } catch (Exception e) {
             throw new InitializationError("初始化 PluginHelper 出错！", e);
         }

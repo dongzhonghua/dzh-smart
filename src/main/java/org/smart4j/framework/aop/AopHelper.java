@@ -23,7 +23,10 @@ import org.smart4j.framework.tx.TransactionProxy;
 import org.smart4j.framework.tx.annotation.Service;
 import org.smart4j.framework.util.ClassUtil;
 import org.smart4j.framework.util.CollectionUtil;
+import org.smart4j.framework.util.JsonUtil;
 import org.smart4j.framework.util.StringUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 初始化 AOP 框架
@@ -31,6 +34,7 @@ import org.smart4j.framework.util.StringUtil;
  * @author huangyong
  * @since 1.0
  */
+@Slf4j
 public class AopHelper {
 
     /**
@@ -42,8 +46,10 @@ public class AopHelper {
         try {
             // 创建 Proxy Map（用于 存放代理类 与 目标类列表 的映射关系）
             Map<Class<?>, List<Class<?>>> proxyMap = createProxyMap();
+            log.info("代理类与目标类列表的映射关系=="+ JsonUtil.toJSON(proxyMap));
             // 创建 Target Map（用于 存放目标类 与 代理类列表 的映射关系）
             Map<Class<?>, List<Proxy>> targetMap = createTargetMap(proxyMap);
+            log.info("目标类与代理类列表的映射关系=="+ JsonUtil.toJSON(proxyMap));
             // 遍历 Target Map
             for (Map.Entry<Class<?>, List<Proxy>> targetEntry : targetMap.entrySet()) {
                 // 分别获取 map 中的 key 与 value

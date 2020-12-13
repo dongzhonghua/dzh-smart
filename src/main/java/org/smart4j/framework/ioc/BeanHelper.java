@@ -9,6 +9,9 @@ import org.smart4j.framework.core.fault.InitializationError;
 import org.smart4j.framework.ioc.annotation.Bean;
 import org.smart4j.framework.mvc.annotation.Action;
 import org.smart4j.framework.tx.annotation.Service;
+import org.smart4j.framework.util.JsonUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 初始化相关 Bean 类
@@ -16,6 +19,7 @@ import org.smart4j.framework.tx.annotation.Service;
  * @author huangyong
  * @since 1.0
  */
+@Slf4j
 public class BeanHelper {
 
     /**
@@ -37,8 +41,13 @@ public class BeanHelper {
                     Object beanInstance = cls.newInstance();
                     // 将 Bean 实例放入 Bean Map 中（键为 Bean 类，值为 Bean 实例）
                     beanMap.put(cls, beanInstance);
+                    /**
+                     * 后续实现依赖注入在IocHelper {@link IocHelper}
+                     */
+
                 }
             }
+            log.info("Bean=="+ beanMap);
         } catch (Exception e) {
             throw new InitializationError("初始化 BeanHelper 出错！", e);
         }

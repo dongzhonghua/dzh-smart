@@ -10,7 +10,10 @@ import org.smart4j.framework.mvc.annotation.Action;
 import org.smart4j.framework.mvc.annotation.Request;
 import org.smart4j.framework.util.ArrayUtil;
 import org.smart4j.framework.util.CollectionUtil;
+import org.smart4j.framework.util.JsonUtil;
 import org.smart4j.framework.util.StringUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 初始化 Action 配置
@@ -18,6 +21,7 @@ import org.smart4j.framework.util.StringUtil;
  * @author huangyong
  * @since 1.0
  */
+@Slf4j
 public class ActionHelper {
 
     /**
@@ -26,7 +30,7 @@ public class ActionHelper {
     private static final Map<Requestor, Handler> actionMap = new LinkedHashMap<Requestor, Handler>();
 
     static {
-        // 获取所有 Action 类
+        // 获取所有 Action 类，这里是不是重复了？可以再beanhelper那里获取，这样的话是遍历了两遍的。
         List<Class<?>> actionClassList = ClassHelper.getClassListByAnnotation(Action.class);
         if (CollectionUtil.isNotEmpty(actionClassList)) {
             // 定义两个 Action Map
@@ -46,6 +50,7 @@ public class ActionHelper {
             // 初始化最终的 Action Map（将 Common 放在 Regexp 前面）
             actionMap.putAll(commonActionMap);
             actionMap.putAll(regexpActionMap);
+            log.info("Action=="+ actionMap);
         }
     }
 

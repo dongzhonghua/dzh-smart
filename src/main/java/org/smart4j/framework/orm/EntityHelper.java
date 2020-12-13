@@ -4,13 +4,17 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.smart4j.framework.core.ClassHelper;
 import org.smart4j.framework.orm.annotation.Column;
 import org.smart4j.framework.orm.annotation.Entity;
 import org.smart4j.framework.orm.annotation.Table;
 import org.smart4j.framework.util.ArrayUtil;
+import org.smart4j.framework.util.JsonUtil;
 import org.smart4j.framework.util.MapUtil;
 import org.smart4j.framework.util.StringUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 初始化 Entity 结构
@@ -18,6 +22,7 @@ import org.smart4j.framework.util.StringUtil;
  * @author huangyong
  * @since 1.0
  */
+@Slf4j
 public class EntityHelper {
 
     /**
@@ -37,6 +42,7 @@ public class EntityHelper {
             initEntityNameMap(entityClass);
             initEntityFieldMapMap(entityClass);
         }
+        log.info("Entity==" + entityClassList);
     }
 
     private static void initEntityNameMap(Class<?> entityClass) {

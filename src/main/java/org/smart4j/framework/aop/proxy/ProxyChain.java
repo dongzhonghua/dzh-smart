@@ -19,7 +19,7 @@ public class ProxyChain {
     private final MethodProxy methodProxy;
     private final Object[] methodParams;
 
-    private List<Proxy> proxyList = new ArrayList<Proxy>();
+    private List<Proxy> proxyList;
     private int proxyIndex = 0;
 
     public ProxyChain(Class<?> targetClass, Object targetObject, Method targetMethod, MethodProxy methodProxy, Object[] methodParams, List<Proxy> proxyList) {
@@ -48,6 +48,9 @@ public class ProxyChain {
         if (proxyIndex < proxyList.size()) {
             methodResult = proxyList.get(proxyIndex++).doProxy(this);
         } else {
+            // invoke方法调用的对象没有增强过，invokeSuper方法调用的对象已经是增强了的，
+            // 所以会再走一遍 MyMethodInterceptor的 interceptor方法，
+            // 如果是个拦截器链条，就会重新在走一次拦截器链；
             methodResult = methodProxy.invokeSuper(targetObject, methodParams);
         }
         return methodResult;

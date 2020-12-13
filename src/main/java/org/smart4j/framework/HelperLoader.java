@@ -23,9 +23,11 @@ public final class HelperLoader {
             DatabaseHelper.class,
             EntityHelper.class,
             ActionHelper.class,
+            // 初始化所有的bean之后才能进行aop，把代理类替换掉bean，此时才能使用IOC把service中的注入的字段替换掉
             BeanHelper.class,
             AopHelper.class,
             IocHelper.class,
+
             PluginHelper.class,
         };
         // 按照顺序加载类
